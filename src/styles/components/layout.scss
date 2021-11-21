@@ -1,0 +1,16 @@
+.layout {
+  display: grid;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 8% 92%;
+  .container-taskgroup{
+    grid-column-start: 2;
+    grid-row: 2;
+  }
+  .panel {
+    grid-column-start: 1;
+    grid-row: span 2;
+  }
+  header{
+    grid-column-start: 2;
+  }
+}

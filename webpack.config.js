@@ -16,6 +16,8 @@ module.exports = {
             '@pages': path.resolve(__dirname, 'src/pages'),
             '@assets': path.resolve(__dirname, 'src/assets'),
             '@styles': path.resolve(__dirname, 'src/styles'),
+            '@context': path.resolve(__dirname, 'src/context'),
+            '@hooks': path.resolve(__dirname, 'src/hooks'),
         }
     },
     module: {
@@ -23,33 +25,19 @@ module.exports = {
             {
                 test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
-                use: {
-                    loader: "babel-loader",
-                    options: {
-                        presets: [
-                            "@babel/preset-env",
-                            "@babel/preset-react"
-                        ],
-                    }
-                }
+                use: "babel-loader"
             },
             {
                 test: /\.html$/,
-                use: {
-                    loader: "html-loader",
-                }
+                use: "html-loader"
             },
             {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, "css-loader"],
+                test: /\.s?[ac]ss$/i,
+                use: [ "style-loader", "css-loader", "sass-loader"],
             },
             {
-                test: /\.(png|jpe?g)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                    },
-                ]
+                test: /\.(png|jpe?g|svg|gif)$/i,
+                type: "asset"
             }
         ]
     },
@@ -58,6 +46,15 @@ module.exports = {
             template: "./public/index.html",
             filename: "index.html"
         }),
-        new MiniCssExtractPlugin()
+        new MiniCssExtractPlugin({
+            filename: '[name].css'
+        }),
     ],
+    devServer:  {
+        static: {
+            directory: path.join(__dirname, 'dist'),
+        },
+        compress: true,
+        port: 3005,
+    }
 }

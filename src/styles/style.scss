@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&display=swap');
+$header-color: #ffffff;
+$background-color: #edf0f5;
+$border: #dadada;
+
+body{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Oswald', sans-serif;
+  background: $background-color;
+}
+
+.container-taskgroup {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row wrap;
+  gap: 50px;
+  padding: 80px;
+}
+
+.menu-background {
+  background-color: rgba(0, 0, 0, 0.2);
+  position: fixed;
+  min-width: 100%;
+  min-height: 100%;
+  top: 0;
+  left: 0;
+}
+input{
+  border: 1px solid $border;
+  border-radius: 0px;
+  min-height: 30px;
+}
+button {
+  border: 1px solid $border;
+  padding: 8px;
+}
+h2 {
+  margin: 0px;
+}
+img{
+  -webkit-user-drag: none;
+}
+.danger{
+  background-color: hsl(348, 86%, 61%);
+  color: white;
+}
+.success{
+  background-color: hsl(153, 53%, 53%);
+  color: white;
+}
+.dragging{
+  opacity: 0.2;
+}
+.inputlabel-container{
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  .errormessage{
+    color: red;
+    font-style: italic;
+    font-size: 12px;
+  }
+}
+@import "./components/layout";
+@import "./components/header";
+@import "./components/panel";
+@import "./components/taskgroup";
+@import "./components/task";
+@import "./components/createtask";
+@import "./components/creategroup";

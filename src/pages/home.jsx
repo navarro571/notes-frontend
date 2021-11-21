@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
+
+import AppContext from "@context/appcontext";
+import TaskGroup from "@containers/taskgroup";
 
 const Home = () => {
+    const { taskgroups, setTaskGroups } = useContext(AppContext);
+
     return (
-        <h1>Hello world it is a home page</h1>
+        <div className="container-taskgroup">
+            {Array.from(taskgroups.keys()).map((group,i) => <TaskGroup name={group} key={i+group} />)}
+        </div>
     );
 }
 
