@@ -12,7 +12,7 @@ const App = () => {
         ["DONE", []]
     ]));
     return (
-        <BrowserRouter basename="/task-frontend/">
+        <BrowserRouter basename="/">
             <AppContext.Provider value={ {taskgroups: taskgroups, setTaskGroups: setTaskGroups } }>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
