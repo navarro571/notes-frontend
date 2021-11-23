@@ -15,9 +15,8 @@ const App = () => {
         <BrowserRouter>
             <AppContext.Provider value={ {taskgroups: taskgroups, setTaskGroups: setTaskGroups } }>
                 <Routes>
-                    <Route exact={true} path="/" element={<Home/>}>
-                        <Route  path="*" element={<NotFound/>} />
-                    </Route>
+                    <Route exact path="/task-frontend/" element={<Home/>}/>
+                    <Route path="*" element={<NotFound/>} />
                 </Routes>
             </AppContext.Provider>
         </BrowserRouter>
