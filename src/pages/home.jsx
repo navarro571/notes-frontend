@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 
-import AppContext from "@context/appcontext";
+import AppContext from "@context/AppContext";
 import TaskGroup from "@containers/taskgroup";
 
 const Home = () => {

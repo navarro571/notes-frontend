@@ -4,7 +4,7 @@ import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "@pages/home.jsx";
 import NotFound from "@pages/notfound.jsx";
 import Layout from "@containers/layout";
-import AppContext from "@context/appcontext";
+import AppContext from "@context/AppContext";
 
 const App = () => {
     const [taskgroups, setTaskGroups] = useState(new Map([

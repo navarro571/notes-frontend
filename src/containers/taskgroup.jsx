@@ -1,24 +1,30 @@
-import React, {useContext} from "react";
+import React, {useContext, useEffect, useRef, useState,} from "react";
 import Task from "@components/task";
-import AppContext from "@context/appcontext";
+import AppContext from "@context/AppContext";
 
 import removeIcon from "@assets/icons/remove.png";
+import useDragContainer from "@hooks/useDragContainer";
 
-function GroupContainTask (tasks){
-    return tasks.length > 0;
-}
+const GroupContainTask = tasks => tasks.length > 0;
+const random = () => Math.floor(Math.random() * 255);
 
-const TaskGroup = ({name }) => {
+const TaskGroup = ({ name }) => {
     const { taskgroups, setTaskGroups } = useContext(AppContext);
+    const [ initialColor, setInitialColor ] = useState({ borderTop: `2px solid rgb(${random()}, ${random()}, ${random()})`});
+    const groupRef = useRef(null);
+
+    useEffect(() => {
+        const group = groupRef.current;
+        useDragContainer(group);
+        console.log(initialColor);
+    }, [])
 
     const removeHandler = () => {
         taskgroups.delete(name);
         setTaskGroups(new Map(taskgroups));
     }
-
     return (
-
-        <div className="taskgroup">
+        <div className="taskgroup" ref={groupRef} style={initialColor} >
             <div className="header">
                 <p className="title">{name.toUpperCase()}</p>
                 <button onClick={() => removeHandler()}>
@@ -27,10 +33,11 @@ const TaskGroup = ({name }) => {
             </div>
             <div className="body">
                 { GroupContainTask(taskgroups.get(name)) &&
-                  taskgroups.get(name).map((task, i) => <Task name={task.name}
+                  taskgroups.get(name).map((task) => <Task id={task.id}
+                                                              name={task.name}
                                                               description={task.description}
-                                                              key={i+task.name}/>) }
-
+                                                              group={name}
+                                                              key={task.id}/>) }
             </div>
         </div>
     );

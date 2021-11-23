@@ -1,5 +1,6 @@
 .panel {
   min-height: 100vh;
+  min-width: 150px;
   background-color: $header-color;
   box-shadow: 0 0 10px 1px rgba(189, 189, 189, 0.5);
   z-index: 1;
@@ -10,6 +11,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    h1 {
+      font-weight: normal;
+    }
   }
   .panel-buttoncontainer{
     display: flex;

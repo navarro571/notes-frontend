@@ -1,5 +1,5 @@
 import React, {useContext, useRef} from "react";
-import AppContext from "@context/appcontext";
+import AppContext from "@context/AppContext";
 
 const CreateGroup = ({ State }) => {
     const { taskgroups, setTaskGroups } = useContext(AppContext);
@@ -11,10 +11,11 @@ const CreateGroup = ({ State }) => {
         e.preventDefault();
         const formData = new FormData(form.current);
         const name = formData.get('groupname');
-        if(taskgroups.has(formData.get('groupname'))){
+        if(name.length === 0) return;
+        if(taskgroups.has(name)){
             errorMessage.current.innerText = "- Este nombre ya existe, introduce otro";
         }else{
-            taskgroups.set(formData.get('groupname').toUpperCase(), []);
+            taskgroups.set(name.toUpperCase(), []);
             setTaskGroups(new Map(taskgroups));
             State(false);
         }

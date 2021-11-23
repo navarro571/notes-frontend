@@ -12,7 +12,7 @@ const Panel = () => {
         <>
             <div className="panel">
                 <div className="panel-title">
-                    <h2>TASK</h2>
+                    <h1>TASK</h1>
                 </div>
                 <div className="panel-buttoncontainer">
                     <button onClick={() => setCreateGroupState(true)}>

@@ -1,26 +1,38 @@
 import React, {useContext, useEffect, useRef} from "react";
 
-import circle from "@assets/icons/circle.png";
 import edit from "@assets/icons/editing.png";
 import eye from "@assets/icons/eye.png";
+import remove from "@assets/icons/trash.png";
+import AppContext from "@context/AppContext";
+import useDraggableTask from "@hooks/useDraggableTask";
 
-const Task = ({ name, description }) => {
+const Task = ({ id, name, description, group }) => {
+    const { taskgroups, setTaskGroups } = useContext(AppContext);
     const taskRef = useRef(null);
+    const DESC_MAXLENGHT = 80;
+    let parent = group;
 
     useEffect(() => {
-        let task = taskRef.current;
-        task.addEventListener('dragstart', () => task.classList.add('dragging'))
-        task.addEventListener('dragend', () => task.classList.remove('dragging'))
-    })
+        const task = taskRef.current;
+        useDraggableTask(task);
+    }, [])
+
+    const RemoveHandler = () => {
+        const tasks = taskgroups.get(parent);
+        tasks.splice(tasks.findIndex(task => task.id === id), 1);
+        taskgroups.set(parent, tasks);
+        setTaskGroups(new Map(taskgroups));
+    }
     return (
-        <div className="task" ref={taskRef} draggable="true" >
+        <div className="task" draggable="true" ref={taskRef}>
             <div className="info">
-                <img src={circle} alt="" draggable="false"/>
-                <p>{name}</p>
+                <p className="task-title">{name}</p>
+                <p className="task-description">{description.length > DESC_MAXLENGHT ? (description.substring(0, DESC_MAXLENGHT)).concat("...") : description}</p>
             </div>
             <div className="options">
                 <img src={eye} alt="" draggable="false"/>
                 <img src={edit} alt="" draggable="false"/>
+                <img src={remove} alt="" onClick={() => RemoveHandler()} draggable="false"/>
             </div>
         </div>
     );

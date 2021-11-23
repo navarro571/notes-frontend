@@ -1,12 +1,12 @@
 .taskgroup {
   background-color: #ffffff;
   min-width: 400px;
-  min-height: 150px;
+  max-width: 400px;
+  height: min-content;
 
   display: flex;
   flex-direction: column;
 
-  border-top: 2px solid black;
   font-size: 18px;
   padding-bottom: 20px;
   .header{
