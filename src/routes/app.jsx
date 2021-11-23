@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Home from "@pages/home.jsx";
 import NotFound from "@pages/NotFound.jsx";
@@ -12,14 +12,13 @@ const App = () => {
         ["DONE", []]
     ]));
     return (
-        <BrowserRouter basename="/">
+        <Router>
             <AppContext.Provider value={ {taskgroups: taskgroups, setTaskGroups: setTaskGroups } }>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
-                    <Route path="*" element={<NotFound/>}/>
                 </Routes>
             </AppContext.Provider>
-        </BrowserRouter>
+        </Router>
     );
 }
 
