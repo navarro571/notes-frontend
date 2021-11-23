@@ -16,7 +16,6 @@ const TaskGroup = ({ name }) => {
     useEffect(() => {
         const group = groupRef.current;
         useDragContainer(group);
-        console.log(initialColor);
     }, [])
 
     const removeHandler = () => {
