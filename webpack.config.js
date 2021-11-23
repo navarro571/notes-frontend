@@ -7,7 +7,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "bundle.js",
-        publicPath: "/task-frontend/"
+        publicPath: "/"
     },
     resolve: {
         extensions: ['.js', '.jsx'],
