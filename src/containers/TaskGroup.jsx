@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useRef, useState,} from "react";
-import Task from "@components/task";
+import Task from "@components/Task";
 import AppContext from "@context/AppContext";
 
 import removeIcon from "@assets/icons/remove.png";

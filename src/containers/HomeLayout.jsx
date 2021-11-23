@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from "@components/header";
-import Panel from "@components/panel";
+import Header from "@components/Header";
+import Panel from "@components/Panel";
 
-const Layout = ({ children }) => {
+const HomeLayout = ({ children }) => {
     return (
         <div className="layout">
             <Panel />
@@ -12,4 +12,4 @@ const Layout = ({ children }) => {
     );
 }
 
-export default Layout;
+export default HomeLayout;

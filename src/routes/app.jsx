@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import Home from "@pages/home.jsx";
-import NotFound from "@pages/notfound.jsx";
-import Layout from "@containers/layout";
+import Home from "@pages/Home.jsx";
+import NotFound from "@pages/NotFound.jsx";
 import AppContext from "@context/AppContext";
 
 const App = () => {
@@ -15,12 +14,10 @@ const App = () => {
     return (
         <BrowserRouter>
             <AppContext.Provider value={ {taskgroups: taskgroups, setTaskGroups: setTaskGroups } }>
-                <Layout>
-                    <Routes>
-                        <Route exact path="/" element={<Home/>}/>
-                        <Route path="*" element={<NotFound/>}/>
-                    </Routes>
-                </Layout>
+                <Routes>
+                    <Route exact path="/" element={<Home/>}/>
+                    <Route path="*" element={<NotFound/>}/>
+                </Routes>
             </AppContext.Provider>
         </BrowserRouter>
 

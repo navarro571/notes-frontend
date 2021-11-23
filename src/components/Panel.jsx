@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import groupIcon from "@assets/icons/boards.png";
 import taskIcon from "@assets/icons/add.png";
-import CreateTask from "@pages/createtask";
-import CreateGroup from "@pages/creategroup";
+import CreateTask from "@pages/CreateTask";
+import CreateGroup from "@pages/CreateGroup";
 
 const Panel = () => {
     const [createTaskState, setCreateTaskState ] = useState(false);
