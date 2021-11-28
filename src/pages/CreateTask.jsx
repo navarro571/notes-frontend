@@ -2,24 +2,14 @@ import React, {useContext, useRef} from "react";
 import AppContext from "@context/AppContext";
 
 const CreateTask = ({ State }) => {
-    const { taskgroups, setTaskGroups } = useContext(AppContext);
+    const { groupReducer, taskReducer } = useContext(AppContext);
 
     const form = useRef(null);
 
     const CreateHandler = e => {
         e.preventDefault();
-        const container = document.querySelector('.taskgroup .title');
-        if(!container){
-            State(false);
-            return;
-        }
         const formData = new FormData(form.current);
-        taskgroups.get(container.textContent).push({
-            id: Math.random().toString().substr(2, 4),
-            name: formData.get('taskname') || "New task",
-            description: formData.get('taskdesc') || "No description task",
-        });
-        setTaskGroups(new Map(taskgroups));
+        //CONSULTAR SI HAY GRUPOS Y SI HAY AGREGA UNA TAREA CON EL IDGROUP 0
         State(false);
     }
     const CloseHandler = e => {
@@ -37,7 +27,7 @@ const CreateTask = ({ State }) => {
                     <div className="createtask-content">
                         <div className="createtask-name">
                             <label htmlFor="name">Task name</label>
-                            <input id="name" name="taskname" type="text" placeholder="name"/>
+                            <input id="name" name="taskname" maxLength={50} type="text" placeholder="name"/>
                         </div>
                         <div className="createtask-description">
                             <label htmlFor="description">Description</label>

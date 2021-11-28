@@ -2,23 +2,14 @@ import React, {useContext, useRef} from "react";
 import AppContext from "@context/AppContext";
 
 const CreateGroup = ({ State }) => {
-    const { taskgroups, setTaskGroups } = useContext(AppContext);
-
+    const { groupReducer } = useContext(AppContext);
     const form = useRef(null)
     const errorMessage = useRef(null);
 
     const CreateHandler = e => {
         e.preventDefault();
         const formData = new FormData(form.current);
-        const name = formData.get('groupname');
-        if(name.length === 0) return;
-        if(taskgroups.has(name)){
-            errorMessage.current.innerText = "- Este nombre ya existe, introduce otro";
-        }else{
-            taskgroups.set(name.toUpperCase(), []);
-            setTaskGroups(new Map(taskgroups));
-            State(false);
-        }
+        //crear group
     }
     const CloseHandler = e => {
         e.preventDefault();

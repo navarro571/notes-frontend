@@ -6,11 +6,11 @@ import remove from "@assets/icons/trash.png";
 import AppContext from "@context/AppContext";
 import useDraggableTask from "@hooks/useDraggableTask";
 
-const Task = ({ id, name, description, group }) => {
+const Task = ({ data }) => {
     const { taskgroups, setTaskGroups } = useContext(AppContext);
     const taskRef = useRef(null);
+    const NAME_MAXLENGHT = 30;
     const DESC_MAXLENGHT = 80;
-    let parent = group;
 
     useEffect(() => {
         const task = taskRef.current;
@@ -26,8 +26,8 @@ const Task = ({ id, name, description, group }) => {
     return (
         <div className="task" draggable="true" ref={taskRef}>
             <div className="info">
-                <p className="task-title">{name}</p>
-                <p className="task-description">{description.length > DESC_MAXLENGHT ? (description.substring(0, DESC_MAXLENGHT)).concat("...") : description}</p>
+                <p className="task-title">{data.name.length > NAME_MAXLENGHT ? (data.name.substring(0, NAME_MAXLENGHT)).concat("...") : data.name}</p>
+                <p className="task-description">{data.desc.length > DESC_MAXLENGHT ? (data.desc.substring(0, DESC_MAXLENGHT)).concat("...") : data.desc}</p>
             </div>
             <div className="options">
                 <img src={eye} alt="" draggable="false"/>

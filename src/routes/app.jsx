@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
-import {BrowserRouter, Switch, Route} from "react-router-dom";
+import React, {useReducer} from 'react';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Home from "@pages/home.jsx";
-import NotFound from "@pages/NotFound.jsx";
 import AppContext from "@context/AppContext";
+import GroupReducer from '../reducers/GroupReducer';
+import TaskReducer from '../reducers/TaskReducer';
+import HttpService from '../services/httpService';
 
-const App = () => {
-    const [taskgroups, setTaskGroups] = useState(new Map([
-        ["TASK", []],
-        ["DOING", []],
-        ["DONE", []]
-    ]));
+const App = ({initialGroups}) => {
+    const groupReducer = useReducer(GroupReducer, initialGroups);
+    const taskReducer = useReducer(TaskReducer, []);
+
     return (
-        <BrowserRouter>
-            <AppContext.Provider value={ {taskgroups: taskgroups, setTaskGroups: setTaskGroups } }>
-                <Switch>
-                    <Route exact path="/" component={Home}/>
-                </Switch>
+        <Router>
+            <AppContext.Provider value={{ groupReducer, taskReducer }}>
+                <Routes>
+                    <Route exact path="/" element={<Home/>}/>
+                </Routes>
             </AppContext.Provider>
-        </BrowserRouter>
+        </Router>
     );
 }
 
