@@ -26,12 +26,13 @@ const useTasks = () => {
     }
     const update = async (id, data) => {
         const res = await fetch(BASE_URL + "/tasks/" + id, {
+            headers: { 'Content-Type': 'application/json' },
             method: 'PUT',
-            body: {
-                group: data.groupid,
+            body: JSON.stringify({
+                groupid: data.groupid,
                 name: data.name || "",
                 desc: data.desc || "",
-            },
+            }),
         }).then(res => res.json());
         updateState();
         return res;
