@@ -1,19 +1,18 @@
-import React, {useReducer} from 'react';
+import React, {useReducer, useEffect} from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
 import Home from "@pages/home.jsx";
 import AppContext from "@context/AppContext";
-import GroupReducer from '../reducers/GroupReducer';
-import TaskReducer from '../reducers/TaskReducer';
-import HttpService from '../services/httpService';
+import useGroups from '@hooks/useGroups';
+import useTasks from '@hooks/useTasks';
 
-const App = ({initialGroups}) => {
-    const groupReducer = useReducer(GroupReducer, initialGroups);
-    const taskReducer = useReducer(TaskReducer, []);
+const App = () => {
+    const groups = useGroups();
+    const tasks = useTasks();
 
     return (
         <Router>
-            <AppContext.Provider value={{ groupReducer, taskReducer }}>
+            <AppContext.Provider value={{ groups, tasks }}>
                 <Routes>
                     <Route exact path="/" element={<Home/>}/>
                 </Routes>

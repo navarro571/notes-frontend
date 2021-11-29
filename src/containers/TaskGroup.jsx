@@ -5,22 +5,22 @@ import AppContext from "@context/AppContext";
 import removeIcon from "@assets/icons/remove.png";
 import useDragContainer from "@hooks/useDragContainer";
 
-const GroupContainTask = tasks => tasks.length > 0;
 const random = () => Math.floor(Math.random() * 255);
 
 const TaskGroup = ({ data }) => {
-    const { taskReducer } = useContext(AppContext);
     const [ initialColor ] = useState({ borderTop: `2px solid rgb(${random()}, ${random()}, ${random()})`});
+    const { groups, tasks } = useContext(AppContext);
+    const { remove } = groups;
+    const { getTasks } = tasks;
     const groupRef = useRef(null);
-    const [state, dispatch] = taskReducer;
+
     useEffect(() => {
         const group = groupRef.current;
         useDragContainer(group);
     }, [])
 
     const removeHandler = () => {
-        //taskgroups.delete(name);
-        setTaskGroups(new Map(taskgroups));
+        remove(data.id);
     }
     return (
         <div className="taskgroup" ref={groupRef} style={initialColor} >
@@ -31,7 +31,7 @@ const TaskGroup = ({ data }) => {
                 </button>
             </div>
             <div className="body">
-                { state.map(task => <Task data={task}
+                { /* Cambiar esto */getTasks(data.id) && getTasks(data.id).map(task => <Task data={task}
                                             key={task.id}/>) }
             </div>
         </div>

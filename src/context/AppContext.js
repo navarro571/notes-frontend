@@ -1,4 +1,4 @@
 import React from "react";
-const AppContext = React.createContext({ groupReducer: null, taskReducer: null });
+const AppContext = React.createContext({ groups: null, tasks: null });
 
 export default AppContext;

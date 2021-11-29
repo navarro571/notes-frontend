@@ -2,14 +2,19 @@ import React, {useContext, useRef} from "react";
 import AppContext from "@context/AppContext";
 
 const CreateGroup = ({ State }) => {
-    const { groupReducer } = useContext(AppContext);
+    const { groups } = useContext(AppContext);
+    const { create } = groups;
     const form = useRef(null)
     const errorMessage = useRef(null);
 
     const CreateHandler = e => {
         e.preventDefault();
         const formData = new FormData(form.current);
-        //crear group
+        const data = {
+            name: formData.get('groupname'),
+        }
+        create(data);
+        State(false);
     }
     const CloseHandler = e => {
         e.preventDefault();

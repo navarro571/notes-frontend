@@ -1,13 +1,14 @@
 import React, {useContext, useEffect, useRef} from "react";
 
-import edit from "@assets/icons/editing.png";
-import eye from "@assets/icons/eye.png";
-import remove from "@assets/icons/trash.png";
+import editIcon from "@assets/icons/editing.png";
+import eyeIcon from "@assets/icons/eye.png";
+import removeIcon from "@assets/icons/trash.png";
 import AppContext from "@context/AppContext";
 import useDraggableTask from "@hooks/useDraggableTask";
 
 const Task = ({ data }) => {
-    const { taskgroups, setTaskGroups } = useContext(AppContext);
+    const { tasks } = useContext(AppContext);
+    const { remove } = tasks;
     const taskRef = useRef(null);
     const NAME_MAXLENGHT = 30;
     const DESC_MAXLENGHT = 80;
@@ -17,12 +18,8 @@ const Task = ({ data }) => {
         useDraggableTask(task);
     }, [])
 
-    const RemoveHandler = () => {
-        const tasks = taskgroups.get(parent);
-        tasks.splice(tasks.findIndex(task => task.id === id), 1);
-        taskgroups.set(parent, tasks);
-        setTaskGroups(new Map(taskgroups));
-    }
+    const RemoveHandler = () => remove(data.id);
+
     return (
         <div className="task" draggable="true" ref={taskRef}>
             <div className="info">
@@ -30,9 +27,9 @@ const Task = ({ data }) => {
                 <p className="task-description">{data.desc.length > DESC_MAXLENGHT ? (data.desc.substring(0, DESC_MAXLENGHT)).concat("...") : data.desc}</p>
             </div>
             <div className="options">
-                <img src={eye} alt="" draggable="false"/>
-                <img src={edit} alt="" draggable="false"/>
-                <img src={remove} alt="" onClick={() => RemoveHandler()} draggable="false"/>
+                <img src={eyeIcon} alt="" draggable="false"/>
+                <img src={editIcon} alt="" draggable="false"/>
+                <img src={removeIcon} alt="" onClick={() => RemoveHandler()} draggable="false"/>
             </div>
         </div>
     );

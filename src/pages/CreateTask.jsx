@@ -2,14 +2,20 @@ import React, {useContext, useRef} from "react";
 import AppContext from "@context/AppContext";
 
 const CreateTask = ({ State }) => {
-    const { groupReducer, taskReducer } = useContext(AppContext);
+    const { tasks } = useContext(AppContext);
+    const { create } = tasks;
 
     const form = useRef(null);
 
     const CreateHandler = e => {
         e.preventDefault();
         const formData = new FormData(form.current);
-        //CONSULTAR SI HAY GRUPOS Y SI HAY AGREGA UNA TAREA CON EL IDGROUP 0
+        const data = {
+            groupid: 0,
+            name: formData.get('taskname') || "",
+            desc: formData.get('taskdesc') || "",
+        }
+        create(data);
         State(false);
     }
     const CloseHandler = e => {
@@ -41,7 +47,6 @@ const CreateTask = ({ State }) => {
                 </form>
             </div>
         </div>
-
     );
 }
 

@@ -3,8 +3,8 @@ import AppContext from "@context/AppContext";
 import TaskGroup from "@containers/TaskGroup";
 
 const Groups = () => {
-    const { groupReducer } = useContext(AppContext);
-    const [state] = groupReducer;
+    const { groups } = useContext(AppContext);
+    const { state } = groups;
     return (
         <>
             <div className="container-taskgroup">
