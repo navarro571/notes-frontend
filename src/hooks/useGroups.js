@@ -6,7 +6,8 @@ const useGroups = (key) => {
     const [state, setState] = useState([]);
 
     useEffect(() => {
-        const interval = setInterval(() => updateState(), 10000);
+        updateState();
+        const interval = setInterval(() => updateState(), 5000);
         return () => clearInterval(interval);
     }, []);
 
@@ -35,6 +36,7 @@ const useGroups = (key) => {
         updateState();
     }
     const updateState = async () => {
+        console.log("Updating groups");
         const res = await fetch(BASE_URL + "/taskgroups/?key=" + key, { method: 'GET' }).then(res => res.json());
         setState(res);
     }
