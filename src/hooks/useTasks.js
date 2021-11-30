@@ -6,7 +6,10 @@ const BASE_URL = "http://localhost:3000/api/v1";
 const useTasks = (key) => {
     const [state, setState] = useState([]);
 
-    useEffect(() => updateState(), [])
+    useEffect(() => {
+        const interval = setInterval(() => updateState(), 10000);
+        return () => clearInterval(interval);
+    }, []);
 
     const find = id => state.find(task => task.id == id);
     const getTasks = groupid => state.filter(task => task.groupid == groupid);

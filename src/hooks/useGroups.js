@@ -4,8 +4,12 @@ const BASE_URL = "http://localhost:3000/api/v1";
 
 const useGroups = (key) => {
     const [state, setState] = useState([]);
-    useEffect(() => updateState(), [])
-    setInterval(() => updateState(), 5000);
+
+    useEffect(() => {
+        const interval = setInterval(() => updateState(), 10000);
+        return () => clearInterval(interval);
+    }, []);
+
     const find = id => state.find(group => group.id == id);
 
     const create = async (data) => {
