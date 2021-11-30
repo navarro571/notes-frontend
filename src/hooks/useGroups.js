@@ -5,7 +5,7 @@ const BASE_URL = "http://localhost:3000/api/v1";
 const useGroups = (key) => {
     const [state, setState] = useState([]);
     useEffect(() => updateState(), [])
-
+    setInterval(() => updateState(), 5000);
     const find = id => state.find(group => group.id == id);
 
     const create = async (data) => {
