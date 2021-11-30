@@ -27,7 +27,7 @@ const Task = ({ data }) => {
 
     return (
         <div className="task" onDragStart={e => dragStartHandler(e)} onDragEnd={e => dragEndHandler(e)} draggable="true" ref={taskRef}>
-            <div className="info">
+            <div className="task-info">
                 <p className="task-title">{data.name.length > NAME_MAXLENGHT ? (data.name.substring(0, NAME_MAXLENGHT)).concat("...") : data.name}</p>
                 <p className="task-description">{data.desc.length > DESC_MAXLENGHT ? (data.desc.substring(0, DESC_MAXLENGHT)).concat("...") : data.desc}</p>
             </div>

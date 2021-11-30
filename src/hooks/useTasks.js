@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 
 const BASE_URL = "http://localhost:3000/api/v1";
 
-const useTasks = () => {
+const useTasks = (key) => {
     const [state, setState] = useState([]);
 
     useEffect(() => updateState(), [])
@@ -12,7 +12,7 @@ const useTasks = () => {
     const getTasks = groupid => state.filter(task => task.groupid == groupid);
 
     const create = async (data) => {
-        const res = await fetch(BASE_URL + "/tasks", {
+        const res = await fetch(BASE_URL + "/tasks?key="+key, {
             headers: { 'Content-Type': 'application/json' },
             method: 'POST',
             body: JSON.stringify({
@@ -25,7 +25,7 @@ const useTasks = () => {
         return res;
     }
     const update = async (id, data) => {
-        const res = await fetch(BASE_URL + "/tasks/" + id, {
+        const res = await fetch(BASE_URL + "/tasks/?key="+key+"&id=" + id, {
             headers: { 'Content-Type': 'application/json' },
             method: 'PUT',
             body: JSON.stringify({
@@ -38,11 +38,11 @@ const useTasks = () => {
         return res;
     }
     const remove = async (id) => {
-        await fetch(BASE_URL + "/tasks/" + id, { method: 'DELETE' }).then(res => res.json());
+        await fetch(BASE_URL + "/tasks/?key="+key+"&id=" + id, { method: 'DELETE' }).then(res => res.json());
         updateState();
     }
     const updateState = async () => {
-        const res = await fetch(BASE_URL + "/tasks", { method: 'GET' }).then(res => res.json());
+        const res = await fetch(BASE_URL + "/tasks/?key=" + key, { method: 'GET' }).then(res => res.json());
         setState(res);
     }
     return {

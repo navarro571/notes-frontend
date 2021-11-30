@@ -1,23 +1,17 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-import Home from "@pages/home.jsx";
-import AppContext from "@context/AppContext";
-import useGroups from '@hooks/useGroups';
-import useTasks from '@hooks/useTasks';
+import Home from "@pages/Home.jsx";
+import InitKeySetter from '../pages/InitKeySetter';
 
 const App = () => {
-    const [dragging, setDragging] = useState();
-    const groups = useGroups();
-    const tasks = useTasks();
-
     return (
         <Router>
-            <AppContext.Provider value={{ groups, tasks, dragging, setDragging }}>
-                <Routes>
-                    <Route exact path="/" element={<Home/>}/>
-                </Routes>
-            </AppContext.Provider>
+            <Routes>
+                <Route exact path="/" element={<InitKeySetter />}/>
+                    <Route exact path=":key" element={<Home />}/>
+                <Route/>
+            </Routes>
         </Router>
     );
 }
