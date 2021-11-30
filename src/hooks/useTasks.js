@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 
-const BASE_URL = "http://localhost:3000/api/v1";
+const BASE_URL = "https://taskmanagerpj.herokuapp.com/api/v1";
 
 const useTasks = (key) => {
     const [state, setState] = useState([]);
